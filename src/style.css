@@ -1,3 +1,9 @@
+/* ---------------------------------------------------------------------------
+   Mobile-first stylesheet.
+   Base styles target the smallest viewport. Wider breakpoints enhance via
+   `@media (min-width: …)` rules at the bottom of the file.
+   --------------------------------------------------------------------------- */
+
 :root {
   --bg: #ffffff;
   --text: #171717;
@@ -37,7 +43,7 @@ body {
 }
 
 body {
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 400;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
@@ -50,76 +56,344 @@ body {
   color: var(--text);
 }
 
+/* ---------- Layout ---------- */
+
 .app {
+  width: 100%;
   max-width: 720px;
   margin: 0 auto;
-  padding: 80px 32px 32px;
+  padding: 32px 16px 24px;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  min-height: 100dvh; /* respects mobile address bar */
 }
 
-/* Hero */
+/* ---------- Hero ---------- */
+
 .hero {
-  margin-bottom: 48px;
+  margin-bottom: 28px;
 }
 
 .eyebrow {
   display: inline-block;
   font-family: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, Monaco,
     Consolas, monospace;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 500;
   line-height: 1;
   text-transform: uppercase;
   color: var(--text-secondary);
-  margin-bottom: 16px;
+  margin-bottom: 12px;
 }
 
 .hero h1 {
-  margin: 0 0 12px;
-  font-size: 48px;
+  margin: 0 0 8px;
+  font-size: 30px;
   font-weight: 600;
   line-height: 1.0;
-  letter-spacing: -2.4px;
+  letter-spacing: -1.4px;
   color: var(--text);
 }
 
 .subtitle {
   margin: 0;
-  font-size: 20px;
+  font-size: 15px;
   font-weight: 400;
-  line-height: 1.6;
+  line-height: 1.55;
   color: var(--text-secondary);
   letter-spacing: normal;
   max-width: 560px;
 }
 
-/* Card */
+/* ---------- Step indicator (above card) ---------- */
+
+.step-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-bottom: 16px;
+  padding: 0 8px;
+}
+
+.step-dot {
+  appearance: none;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  width: 56px;
+  font-family: inherit;
+  color: var(--text-muted);
+  transition: color 0.2s ease;
+}
+
+.step-dot[disabled] {
+  cursor: not-allowed;
+}
+
+.step-dot-num {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, Monaco,
+    Consolas, monospace;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1;
+  color: var(--text-muted);
+  box-shadow: var(--shadow-ring-light);
+  transition: background 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.step-dot-label {
+  font-family: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, Monaco,
+    Consolas, monospace;
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  line-height: 1;
+}
+
+.step-dot.is-active .step-dot-num {
+  background: var(--text);
+  color: #ffffff;
+  box-shadow: var(--shadow-border);
+}
+
+.step-dot.is-active {
+  color: var(--text);
+}
+
+.step-dot.is-completed .step-dot-num {
+  background: var(--text);
+  color: #ffffff;
+}
+
+.step-dot.is-completed {
+  color: var(--text-secondary);
+}
+
+.step-line {
+  flex: 0 1 32px;
+  height: 1px;
+  background: var(--gray-100);
+  align-self: flex-start;
+  margin-top: 13px; /* line aligns with dot center */
+  transition: background 0.25s ease;
+}
+
+.step-line.is-completed {
+  background: var(--text);
+}
+
+/* ---------- Card ---------- */
+
 .card {
   background: #ffffff;
   border-radius: 8px;
-  padding: 24px;
+  padding: 16px;
   box-shadow: var(--shadow-card);
+  position: relative;
+  overflow: hidden;
+}
+
+/* ---------- Step views ---------- */
+
+.step[hidden] {
+  display: none;
+}
+
+.step-head {
+  margin-bottom: 16px;
+}
+
+.step-num-mono {
+  display: inline-block;
+  font-family: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, Monaco,
+    Consolas, monospace;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+.step-title {
+  margin: 0 0 6px;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.6px;
+  color: var(--text);
+}
+
+.step-blurb {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+
+/* ---------- Review (step 3) ---------- */
+
+.review {
+  background: var(--gray-50);
+  border-radius: 6px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.review-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.review-label {
+  font-family: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, Monaco,
+    Consolas, monospace;
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  flex: 0 0 auto;
+}
+
+.review-value {
+  font-family: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, Monaco,
+    Consolas, monospace;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text);
+  text-align: right;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+}
+
+/* ---------- Result counters ---------- */
+
+.result {
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.result[hidden] {
+  display: none;
+}
+
+.result-stat {
+  background: var(--gray-50);
+  border-radius: 6px;
+  padding: 14px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.result-stat-num {
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -1px;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+
+.result-stat-label {
+  font-family: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, Monaco,
+    Consolas, monospace;
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* ---------- Step navigation (Back / Continue) ---------- */
+
+.step-nav {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.step-nav .btn-secondary[hidden] {
+  display: none;
+}
+
+.step-nav .btn-primary {
+  margin-left: auto;
+}
+
+.btn-ghost {
+  appearance: none;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: color 0.15s ease, background 0.15s ease;
+}
+
+.btn-ghost:hover {
+  color: var(--text);
+  background: var(--gray-50);
+}
+
+.inline-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 12px;
+}
+
+.inline-actions[hidden] {
+  display: none;
 }
 
 .row + .row {
-  margin-top: 20px;
+  margin-top: 16px;
 }
 
 .row label {
   display: block;
   font-family: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, Monaco,
     Consolas, monospace;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 500;
   line-height: 1;
   text-transform: uppercase;
   color: var(--text-secondary);
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
-/* Path row uses the shadow-border technique, not a real border */
+/* ---------- Path row (input/output picker) ---------- */
+
 .path-row {
   display: flex;
   align-items: center;
@@ -129,6 +403,7 @@ body {
   padding: 4px 4px 4px 12px;
   box-shadow: var(--shadow-border);
   transition: box-shadow 0.15s ease;
+  min-height: 44px;
 }
 
 .path-row:focus-within {
@@ -139,14 +414,15 @@ body {
 
 .path {
   flex: 1;
+  min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   font-family: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, Monaco,
     Consolas, monospace;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 500;
-  line-height: 1.54;
+  line-height: 1.5;
   color: var(--text);
 }
 
@@ -154,11 +430,14 @@ body {
   color: var(--text-muted);
 }
 
-/* Buttons */
+/* ---------- Buttons ---------- */
+
 .row.actions {
-  margin-top: 28px;
+  margin-top: 24px;
   display: flex;
   justify-content: flex-end;
+  gap: 8px;
+  flex-wrap: wrap;
 }
 
 .btn {
@@ -166,12 +445,13 @@ body {
   border: none;
   background: transparent;
   border-radius: 6px;
-  padding: 8px 16px;
+  padding: 10px 16px;
   font-family: inherit;
   font-size: 14px;
   font-weight: 500;
-  line-height: 1.43;
+  line-height: 1.2;
   cursor: pointer;
+  min-height: 40px; /* thumb-friendly tap target */
   transition: background 0.15s ease, box-shadow 0.15s ease, color 0.15s ease,
     opacity 0.15s ease;
   letter-spacing: normal;
@@ -201,31 +481,169 @@ body {
   background: #ffffff;
   color: var(--text);
   box-shadow: var(--shadow-ring-light);
-  padding: 6px 12px;
+  padding: 8px 14px;
 }
 
 .btn-secondary:hover {
   background: var(--gray-50);
 }
 
-/* Status */
+/* ---------- File list ---------- */
+
+.file-list {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 360px;
+  overflow-y: auto;
+  /* Custom scrollbar that doesn't take horizontal space on mobile */
+  scrollbar-width: thin;
+}
+
+.file-list[hidden] {
+  display: none;
+}
+
+.file-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #ffffff;
+  border-radius: 6px;
+  padding: 8px;
+  box-shadow: var(--shadow-border);
+  transition: box-shadow 0.15s ease;
+}
+
+.file-item--loading {
+  opacity: 0.7;
+}
+
+.file-item--error .file-stats {
+  color: #c0392b;
+}
+
+.file-thumb-wrap {
+  flex: 0 0 56px;
+  width: 56px;
+  height: 56px;
+  border-radius: 4px;
+  overflow: hidden;
+  background:
+    repeating-conic-gradient(#f1f1f1 0% 25%, #ffffff 0% 50%) 50% / 12px 12px;
+  box-shadow: var(--shadow-border);
+}
+
+.file-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.file-thumb--placeholder {
+  background: var(--gray-50);
+}
+
+.file-meta {
+  flex: 1;
+  min-width: 0;
+}
+
+.file-name {
+  font-family: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, Monaco,
+    Consolas, monospace;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  line-height: 1.35;
+}
+
+.file-stats {
+  font-family: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, Monaco,
+    Consolas, monospace;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-muted);
+  letter-spacing: 0;
+  margin-top: 2px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.file-remove {
+  flex: 0 0 40px;
+  width: 40px;
+  height: 40px;
+  appearance: none;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 1;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.file-remove:hover {
+  background: var(--gray-50);
+  color: var(--text);
+}
+
+.file-remove:focus-visible {
+  outline: 2px solid var(--focus-blue);
+  outline-offset: 2px;
+}
+
+/* ---------- Progress bar ---------- */
+
+.progress-bar {
+  margin-top: 16px;
+  height: 2px;
+  background: var(--gray-100);
+  border-radius: 1px;
+  overflow: hidden;
+}
+
+.progress-bar[hidden] {
+  display: none;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0;
+  background: var(--text);
+  transition: width 0.25s ease;
+}
+
+/* ---------- Status ---------- */
+
 .status {
-  margin-top: 20px;
+  margin-top: 12px;
   min-height: 20px;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 400;
   color: var(--text-secondary);
   line-height: 1.43;
+  word-break: break-word;
 }
 
-/* Footer */
+/* ---------- Footer ---------- */
+
 .footer {
   margin-top: auto;
-  padding-top: 32px;
+  padding-top: 24px;
   text-align: right;
   font-family: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, Monaco,
     Consolas, monospace;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 500;
   line-height: 1;
   text-transform: uppercase;
@@ -233,26 +651,158 @@ body {
   letter-spacing: 0;
 }
 
-/* Responsive: tighten up on narrow viewports */
-@media (max-width: 600px) {
-  .app {
-    padding: 48px 20px 24px;
-  }
-
-  .hero {
-    margin-bottom: 32px;
-  }
-
-  .hero h1 {
-    font-size: 36px;
-    letter-spacing: -1.6px;
-  }
-
-  .subtitle {
+/* ===========================================================================
+   Tablet+ (≥600px): more breathing room, slightly larger type.
+   =========================================================================== */
+@media (min-width: 600px) {
+  body {
     font-size: 16px;
   }
 
+  .app {
+    padding: 56px 24px 24px;
+  }
+
+  .hero {
+    margin-bottom: 36px;
+  }
+
+  .eyebrow {
+    font-size: 12px;
+    margin-bottom: 14px;
+  }
+
+  .hero h1 {
+    font-size: 38px;
+    letter-spacing: -1.9px;
+  }
+
+  .subtitle {
+    font-size: 17px;
+    line-height: 1.6;
+  }
+
   .card {
-    padding: 20px;
+    padding: 22px;
+  }
+
+  .row + .row {
+    margin-top: 18px;
+  }
+
+  .row.actions {
+    margin-top: 26px;
+  }
+
+  .file-thumb-wrap {
+    flex: 0 0 52px;
+    width: 52px;
+    height: 52px;
+  }
+
+  .step-indicator {
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  .step-line {
+    flex: 0 1 48px;
+  }
+
+  .step-title {
+    font-size: 26px;
+    letter-spacing: -0.8px;
+  }
+
+  .step-blurb {
+    font-size: 14px;
+  }
+
+  .result-stat-num {
+    font-size: 36px;
+    letter-spacing: -1.5px;
+  }
+}
+
+/* ===========================================================================
+   Desktop (≥900px): full Vercel hero, denser file rows for pointer precision.
+   =========================================================================== */
+@media (min-width: 900px) {
+  .app {
+    padding: 80px 32px 32px;
+  }
+
+  .hero {
+    margin-bottom: 48px;
+  }
+
+  .hero h1 {
+    font-size: 48px;
+    letter-spacing: -2.4px;
+  }
+
+  .subtitle {
+    font-size: 20px;
+    line-height: 1.6;
+  }
+
+  .card {
+    padding: 24px;
+  }
+
+  .file-item {
+    gap: 12px;
+  }
+
+  .file-thumb-wrap {
+    flex: 0 0 48px;
+    width: 48px;
+    height: 48px;
+  }
+
+  .file-remove {
+    flex: 0 0 32px;
+    width: 32px;
+    height: 32px;
+    font-size: 18px;
+  }
+
+  .btn {
+    min-height: 36px;
+    padding: 8px 16px;
+  }
+
+  .btn-secondary {
+    padding: 6px 12px;
+  }
+
+  .step-indicator {
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+
+  .step-dot-num {
+    width: 32px;
+    height: 32px;
+    font-size: 13px;
+  }
+
+  .step-line {
+    flex: 0 1 64px;
+    margin-top: 15px;
+  }
+
+  .step-title {
+    font-size: 30px;
+    letter-spacing: -1px;
+  }
+
+  .result-stat-num {
+    font-size: 44px;
+    letter-spacing: -2px;
+  }
+
+  .result-stat {
+    padding: 20px 16px;
   }
 }

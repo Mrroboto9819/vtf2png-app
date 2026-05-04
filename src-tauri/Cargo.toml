@@ -20,6 +20,13 @@ tauri-plugin-opener = "2"
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 
+# VTF/PNG pipeline
+texture2ddecoder = "0.1"   # pure-Rust DXT1/3/5 decoder (MIT/Apache)
+png = "0.17"               # PNG encoder (replaces libpng, pure Rust)
+walkdir = "2.5"            # find .vtf files in a folder
+thiserror = "2"            # ergonomic enum error types
+base64 = "0.22"            # encode preview PNGs for the frontend
+
 [profile.release]
 panic = "abort"
 codegen-units = 1
