@@ -100,8 +100,7 @@ Output lands in `src-tauri/target/release/bundle/`. Each platform produces its n
 │       ├── vtf.rs          # header parser
 │       ├── decode.rs       # pixel decoder
 │       └── convert.rs      # file → PNG, folder batch
-├── DESIGN.md               # Vercel/Geist design-system reference
-└── legacy/                 # old Kivy + Docker prototype (unmaintained)
+└── DESIGN.md               # Vercel/Geist design-system reference
 ```
 
 ## Icons

@@ -1,14 +1,3 @@
-# Byte-compiled / cache files
-__pycache__/
-*.py[cod]
-*$py.class
-
-# Python virtual environments
-venv/
-env/
-ENV/
-.venv/
-
 # Logs and temp files
 *.log
 *.tmp
@@ -30,10 +19,6 @@ dist-ssr/
 # Tauri / Rust build artifacts
 src-tauri/target/
 src-tauri/gen/
-
-# Kivy build artifacts
-.kivy/
-.kv__*.py
 
 # Sample data folder used while testing conversions
 data/
