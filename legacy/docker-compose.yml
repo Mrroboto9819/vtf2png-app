@@ -1,0 +1,21 @@
+services:
+  vtf2png:
+    build: .
+    image: vtf2png-front-app
+    container_name: vtf2png
+    environment:
+      - DISPLAY=${DISPLAY:-:0}
+      - PULSE_SERVER=${PULSE_SERVER:-}
+      - WAYLAND_DISPLAY=${WAYLAND_DISPLAY:-}
+      - XDG_RUNTIME_DIR=/tmp
+    volumes:
+      # Linux X11 socket (also used by WSLg on Windows 11)
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      # WSLg socket (Windows 11 + Docker Desktop with WSL2 backend)
+      - /mnt/wslg:/mnt/wslg
+      # Mount a host folder so the GUI's file picker can see your files.
+      # Edit ./data on the left side to point at where your .vtf files live.
+      - ./data:/data
+    network_mode: host
+    stdin_open: true
+    tty: true

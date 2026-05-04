@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VTF to PNG Converter</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap"
+    />
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <main class="app">
+      <header class="hero">
+        <span class="eyebrow">Desktop Converter</span>
+        <h1>VTF &rarr; PNG</h1>
+        <p class="subtitle">Batch convert Valve Texture Format files to PNG.</p>
+      </header>
+
+      <section class="card">
+        <div class="row">
+          <label for="pick-input">Input Folder</label>
+          <div class="path-row">
+            <span id="input-path" class="path muted">No folder selected</span>
+            <button id="pick-input" class="btn btn-secondary">Choose</button>
+          </div>
+        </div>
+
+        <div class="row">
+          <label for="pick-output">Output Folder</label>
+          <div class="path-row">
+            <span id="output-path" class="path muted">No folder selected</span>
+            <button id="pick-output" class="btn btn-secondary">Choose</button>
+          </div>
+        </div>
+
+        <div class="row actions">
+          <button id="convert" class="btn btn-primary" disabled>Convert</button>
+        </div>
+
+        <div id="status" class="status"></div>
+      </section>
+
+      <footer class="footer">
+        <span id="version"></span>
+      </footer>
+    </main>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

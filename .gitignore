@@ -3,16 +3,11 @@ __pycache__/
 *.py[cod]
 *$py.class
 
-# Virtual environment
+# Python virtual environments
 venv/
 env/
 ENV/
 .venv/
-
-# PyInstaller build folders
-build/
-dist/
-*.spec
 
 # Logs and temp files
 *.log
@@ -26,18 +21,19 @@ Thumbs.db
 .vscode/
 .idea/
 
-# Compiled binaries or temporary artifacts
-*.so
-*.dll
-*.exe
-*.app
+# Node / Vite
+node_modules/
+dist/
+dist-ssr/
+.vite/
 
-# Kivy build artifacts (if using buildozer or packaging)
+# Tauri / Rust build artifacts
+src-tauri/target/
+src-tauri/gen/
+
+# Kivy build artifacts
 .kivy/
 .kv__*.py
 
-# Output images
-*.png
-*.jpg
-*.jpeg
-
+# Sample data folder used while testing conversions
+data/
