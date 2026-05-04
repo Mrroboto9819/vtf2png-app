@@ -79,11 +79,15 @@ Output lands in `src-tauri/target/release/bundle/`. Each platform produces its n
 
 ```
 .
-├── index.html              # Vite entry, shadow-bordered UI
-├── package.json            # frontend deps + scripts
+├── index.html              # Vite entry, mounts React into #root
+├── package.json            # frontend deps + scripts (React + Vite + GSAP)
 ├── vite.config.js
-├── src/                    # frontend (vanilla JS + CSS)
-│   ├── main.js
+├── src/                    # frontend (React 18 + CSS)
+│   ├── main.jsx            # React bootstrap
+│   ├── App.jsx             # main wizard component (state, GSAP, Tauri)
+│   ├── components/
+│   │   ├── StepIndicator.jsx
+│   │   └── FileItem.jsx
 │   └── style.css
 ├── src-tauri/              # Rust backend
 │   ├── Cargo.toml
